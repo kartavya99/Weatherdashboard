@@ -4,6 +4,8 @@ var getCityEl = document.getElementById("getCity");
 var recentSearch = document.getElementById("recentSearch");
 var APIkey = "f805021a6cac71ae596d346f5ed12f7b";
 var city;
+var dateToday = moment().format('ll');
+console.log(dateToday);
 
 var fromCityName = function (event) {
     event.preventDefault();
@@ -46,20 +48,29 @@ function getApi(city) {
         })
         .then(function (data2){
             console.log(data2);
+
+            
+            var currentDate =document.createElement("h3")
+            var temperature = document.createElement("p"); 
+            var humidity = document.createElement("p");  
+            var windSpeed = document.createElement("p"); 
+            var uvIndex =  document.createElement("p"); 
+        
+            currentDate.textContent = dateToday;
+            temperature.textContent = ("Temperature: " + (data2.current.temp) + "°C");         
+            humidity.textContent = ("Humidity: "+ (data2.current.humidity) + "%");
+            windSpeed.textContent =("WindSpeed: " + (data2.current.wind_speed) + "KMP");
+            uvIndex.textContent = ("UV Index: " + (data2.current.uvi));
+        
+
+            currentWeather.appendChild(currentDate);
+            currentWeather.appendChild(temperature);
+            currentWeather.appendChild(humidity);
+            currentWeather.appendChild(windSpeed);
+            currentWeather.appendChild(uvIndex);
+            //console.log(currentWeather);
         });
-        for (var i = 0; i < data1.current.length; i++){
-            var temperature = document.createElement("h3"); 
-            // var humidity = document.createElement("h4");  
-            // var windSpeed = document.createElement("h5"); 
-            // var uvIndex =  document.createElement("h6"); 
         
-            temperature.textContent = data.current[i].temp;
-            // humidity.textContent = data.current[i].humidity;
-            // windSpeed.textContent = data.current[i].weather.wind_speed;
-            // uvIndex.textContent = data.current[i].uvi;
-        
-            temperature.appendChild(currentWeather);
-            }
         
         });
 
