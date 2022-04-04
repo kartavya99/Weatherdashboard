@@ -7,13 +7,13 @@ var city;
 var dateToday = moment().format('ll');
 console.log(dateToday);
 
+
+// fromCityName function to obtain city name and added click event listener on it at the end of the code.
 var fromCityName = function (event) {
     event.preventDefault();
 
     var getCity = getCityEl.value.trim();
-    
-    
-
+     
     if(getCity) {
         getApi(getCity);
         getCityEl.value = "";
@@ -35,8 +35,8 @@ function getApi(city) {
          .then(function (data1){
              console.log(data1)
              
-    // current weather conditions
     
+    // accessing lat and lon from data 1 response from API for the city name
     var lat = data1.coord.lat;
     var lon = data1.coord.lon;
 
@@ -49,7 +49,7 @@ function getApi(city) {
         .then(function (data2){
             console.log(data2);
 
-            
+         // creating different element to render current weather conditions   
             var currentDate =document.createElement("h3")
             var temperature = document.createElement("p"); 
             var humidity = document.createElement("p");  
@@ -82,18 +82,7 @@ function getApi(city) {
     
     // reading city name and rendering into web browser
     recentSearch.prepend(citiesSearched);
-
     
-    
-
-    //var CityName = data.main.name;
-    
-
-    
-   
-        
-      
-      
         
     
 
