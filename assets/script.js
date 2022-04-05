@@ -99,7 +99,7 @@ function getApi(city) {
                     
                     
                     
-                    console.log(fiveDay);
+                    //console.log(fiveDay);
                   
                    
                     
