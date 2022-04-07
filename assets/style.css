@@ -3,6 +3,15 @@ body{
     padding: 0;
     font-family: 'Open Sans', sans-serif;
     max-width: auto;
+    background-color: beige;
       
 }
 
+#fiveDay{
+background-color: beige;
+}
+
+#searchResult{
+    background-color: beige;
+    
+}
