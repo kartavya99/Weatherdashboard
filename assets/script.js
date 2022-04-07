@@ -7,6 +7,9 @@ var today = moment().format('ll');
 console.log(today);
 var fiveDay = document.getElementById("fiveDay");
 var weatherHeading = document.getElementById("futureHeading");
+//var weatherDisplay = document.getElementById("weatherDisplay");
+//document.getElementById("weatherDisplay").innerHTML ="";
+
 
 
 
@@ -51,6 +54,7 @@ function getApi(city) {
         .then(function (data2){
             console.log(data2);
 
+                currentWeather.textContent = "";
                 // current weather conditions.
                 var currentDate =document.createElement("h3")
                 var temperature = document.createElement("p"); 
@@ -68,10 +72,11 @@ function getApi(city) {
                 currentWeather.append(currentDate, temperature, windSpeed, humidity, uvIndex);
                 var futureHeading = document.createElement("h3");
                 futureHeading.textContent = "5-Day Forecast";
+                weatherHeading.textContent = "";
                 weatherHeading.append(futureHeading);
                 console.log(currentWeather);
 
-
+                fiveDay.textContent = "";
                 //for loop to access the weather data for next 5 days.
                 for (var i = 1; i < 6; i++){
                     var cityInfo = {
@@ -81,21 +86,24 @@ function getApi(city) {
                         humidity: data2.daily[i].humidity
                     };
                     var futureDate = moment.unix(cityInfo.date).format("ll");
+                    var iconURL = `<img src="https://openweathermap.org/img/w/${cityInfo.icon}.png" alt="${data2.daily[i].weather[0].main}" />`;
 
                     
                     var futureCard = document.createElement("div");
                     var fiveDatDate= document.createElement("h5");
                     var fiveDayTemp = document.createElement("p");
+                    var fiveDayIcon = document.createElement("p");
                     var fiveDayHumidity = document.createElement("p");
                     
                     
                     
                     fiveDatDate.append("Date :"+ " " + futureDate);
                     fiveDayTemp.append("Temperature :" + " " + cityInfo.temp );
+                    fiveDayIcon.append(iconURL);
                     fiveDayHumidity.append("Humidity :" + " " + cityInfo.humidity + "%");
 
                     // console.log(fiveDatDate, fiveDayTemp, fiveDayHumidity);
-                    
+                    console.log(fiveDayIcon);
                     
                     futureCard.append(fiveDatDate, fiveDayTemp, fiveDayHumidity);
 
@@ -106,7 +114,7 @@ function getApi(city) {
                
 
                 futureCard.setAttribute("class", "pl-3, card-body");
-                futureCard.setAttribute("class" , "pl-3 pt-3 mb-3 bg-primary text-light", "card-body", "width: 12rem");
+                //futureCard.setAttribute("class" , "pl-3 pt-3 mb-3 bg-primary text-light", "card-body", "width: 12rem");
                 futureCard.setAttribute("style", "width: 12rem");
                                
 
@@ -115,9 +123,9 @@ function getApi(city) {
                 }
                 
                 
-        });
-       
-        
+            });
+            
+            
         });
 
 
@@ -134,14 +142,14 @@ function getApi(city) {
     searchHistory.setAttribute("class", "btn btn-primary");
     searchHistory.addEventListener("click", (getCity));
     localStorage.removeItem("city-search");
-    // create list element and set button attribute
-    // add onclick event.
-
+    
+    
      
     
-      
+ 
 
  }
+
 
 
 fetchButton.addEventListener("click", fromCityName);
