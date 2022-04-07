@@ -1,4 +1,4 @@
-var currentWeather = document.getElementById("currentWeather");
+var currentWeather = document.getElementById("currentCityWeather");
 var fetchButton = document.getElementById("fetch-button");
 var getCityEl = document.getElementById("getCity");
 var searchHistory = document.getElementById("searchHistory");
@@ -6,7 +6,7 @@ var APIkey = "f805021a6cac71ae596d346f5ed12f7b";
 var today = moment().format('ll');
 console.log(today);
 var fiveDay = document.getElementById("fiveDay");
-
+var weatherHeading = document.getElementById("futureHeading");
 
 
 
@@ -65,12 +65,12 @@ function getApi(city) {
                 uvIndex.textContent = ("UV Index: " + (data2.current.uvi));
             
 
-                currentWeather.appendChild(currentDate);
-                currentWeather.appendChild(temperature);
-                currentWeather.appendChild(humidity);
-                currentWeather.appendChild(windSpeed);
-                currentWeather.appendChild(uvIndex);
-                
+                currentWeather.append(currentDate, temperature, windSpeed, humidity, uvIndex);
+                var futureHeading = document.createElement("h3");
+                futureHeading.textContent = "5-Day Forecast";
+                weatherHeading.append(futureHeading);
+                console.log(currentWeather);
+
 
                 //for loop to access the weather data for next 5 days.
                 for (var i = 1; i < 6; i++){
@@ -80,37 +80,41 @@ function getApi(city) {
                         temp: data2.daily[i].temp.day,
                         humidity: data2.daily[i].humidity
                     };
-                    
-                   
-                     // var futureDate = document.createElement("h4");
-                    // var futureTemp = document.createElement("p");
-                    // var futureHumidity = document.createElement("p");
+                    var futureDate = moment.unix(cityInfo.date).format("ll");
 
-                    // futureDate.textContent = data2.daily[i].dt;
-                    // futureTemp.textContent = data2.daily[i].temp.day;
-                    // futureHumidity.textContent = data2.daily[i].humidity;
                     
-                    
-                   var futureDate = moment.unix(cityInfo.date).format("ll");
-                   console.log(futureDate);
-                   console.log(cityInfo);
-                    
-                    //rendering data, temperature and humidity here
+                    var futureCard = document.createElement("div");
+                    var fiveDatDate= document.createElement("h5");
+                    var fiveDayTemp = document.createElement("p");
+                    var fiveDayHumidity = document.createElement("p");
                     
                     
                     
-                    //console.log(fiveDay);
-                  
-                   
+                    fiveDatDate.append("Date :"+ " " + futureDate);
+                    fiveDayTemp.append("Temperature :" + " " + cityInfo.temp );
+                    fiveDayHumidity.append("Humidity :" + " " + cityInfo.humidity + "%");
+
+                    // console.log(fiveDatDate, fiveDayTemp, fiveDayHumidity);
                     
-                   
-                   
-                   
+                    
+                    futureCard.append(fiveDatDate, fiveDayTemp, fiveDayHumidity);
+
+                     //futureCard.append("Date"+ " " + futureDate , "Temperature:" + " " + cityInfo.temp , "Humidity" + " " + cityInfo.humidity);
+                    fiveDay.appendChild(futureCard);
+                    // console.log(futureDate);
+                    // console.log(cityInfo);      
+               
+
+                futureCard.setAttribute("class", "pl-3, card-body");
+                futureCard.setAttribute("class" , "pl-3 pt-3 mb-3 bg-primary text-light", "card-body", "width: 12rem");
+                futureCard.setAttribute("style", "width: 12rem");
+                               
+
+
 
                 }
-
-
-                         
+                
+                
         });
        
         
@@ -127,21 +131,17 @@ function getApi(city) {
     var recentSearchList = document.createElement("ul");
     recentSearchList.textContent = citiesSearched;
     searchHistory.prepend(recentSearchList);
-    searchHistory.setAttribute("class", "btn-info");
+    searchHistory.setAttribute("class", "btn btn-primary");
     searchHistory.addEventListener("click", (getCity));
+    localStorage.removeItem("city-search");
     // create list element and set button attribute
     // add onclick event.
 
-    
-    
      
-        
     
       
 
  }
-
-
 
 
 fetchButton.addEventListener("click", fromCityName);
