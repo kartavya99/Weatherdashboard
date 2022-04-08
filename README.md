@@ -15,6 +15,8 @@ This is a weather dashboard application with form inputs that will run in the br
 <img src = "assets/images/homepage.png" width ="400">
 <img src =  "assets/images/weatherdisplay.png" width ="400">
 
+## https://kartavya99.github.io/weatherdashboard/
+
 ## Technologies and Libraries
 ### HTML
 ### CSS
@@ -26,6 +28,7 @@ used to display date
 The DOM was used for the purpose to create elements for HTML and also to update elements features programmatically through DOM. DOM allowed to manipulate, structure and style the web application.
 ### Server-Side API
 openweathermap API was used for current city search, current weather conditions and also for 5 days weather forecast.
+
 
 
 
