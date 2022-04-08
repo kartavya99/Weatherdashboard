@@ -64,7 +64,7 @@ function getApi(city) {
                 var uvIndex =  document.createElement("p"); 
             
                 currentDate.textContent = today;
-                temperature.textContent = ("Temperature: " + (data2.current.temp) + "°C");  
+                temperature.textContent = ("Temp : " + (data2.current.temp) + "°C" );  
                 humidity.textContent = ("Humidity: "+ (data2.current.humidity) + "%");
                 windSpeed.textContent =("WindSpeed: " + (data2.current.wind_speed) + "KMP");
                 uvIndex.textContent = ("UV Index: " + (data2.current.uvi));
@@ -104,8 +104,9 @@ function getApi(city) {
                     
                     
                     
-                    fiveDatDate.append("Date :"+ " " + futureDate);
-                    fiveDayTemp.append("Temperature :" + " " + cityInfo.temp );
+                    
+                    fiveDatDate.append(futureDate);
+                    fiveDayTemp.append("Temp :" + " " + cityInfo.temp + " °C" );
                     fiveDayIcon.append(iconURL);
                     fiveDayHumidity.append("Humidity :" + " " + cityInfo.humidity + "%");
 
