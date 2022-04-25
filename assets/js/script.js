@@ -14,8 +14,8 @@ var weatherHeading = document.getElementById("futureHeading");
 
 
 var fromCityName = function (event) {
-    event.preventDefault();
-
+   event.preventDefault();
+   
     var getCity = getCityEl.value.trim();
         if(getCity) {
         getApi(getCity);
@@ -154,12 +154,16 @@ function getApi(city) {
     searchHistory.addEventListener("click", (getCity));
     localStorage.removeItem("city-search");
     
-    
+    searchHistory.addEventListener("click", (event) => {
+        var prevSearch = event.target.innerHTML;
+        getApi(prevSearch);
+    })
      
-    
  
-
  }
+
+  
+ 
 
 
 
